@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>A Question For You ❤️</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #120006, #3b0015, #100006);
+      color: white;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .card {
+      width: 90%;
+      max-width: 500px;
+      padding: 35px 25px;
+      border-radius: 25px;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(15px);
+      box-shadow: 0 0 40px rgba(255, 0, 90, 0.25);
+    }
+
+    .heart {
+      font-size: 70px;
+      animation: beat 1.2s infinite;
+    }
+
+    @keyframes beat {
+      0%, 100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.2);
+      }
+    }
+
+    h1 {
+      font-size: 32px;
+      margin: 15px 0;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.6;
+      color: #ffd9e5;
+    }
+
+    button {
+      border: none;
+      padding: 14px 30px;
+      margin: 10px;
+      border-radius: 30px;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    #yes {
+      background: #ff2f75;
+      color: white;
+      box-shadow: 0 0 20px rgba(255, 47, 117, 0.6);
+    }
+
+    #no {
+      background: white;
+      color: #ff2f75;
+    }
+
+    #message {
+      display: none;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .floating-heart {
+      position: fixed;
+      bottom: -20px;
+      font-size: 25px;
+      animation: float 5s linear forwards;
+      pointer-events: none;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateY(-110vh);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card" id="question">
+
+    <div class="heart">❤️</div>
+
+    <h1>I Have A Question For You...</h1>
+
+    <p>
+      There is someone who makes ordinary moments feel special.
+      Someone who makes my heart smile.
+      <br><br>
+      And I have something important to ask...
+    </p>
+
+    <h2>Will you be mine? 💖</h2>
+
+    <button id="yes" onclick="sayYes()">YES ❤️</button>
+
+    <button id="no" onclick="sayNo()">NO 😭</button>
+
+  </div>
+
+
+  <div class="card hidden" id="message">
+
+    <div class="heart">🥹❤️</div>
+
+    <h1>YOU SAID YES! ❤️</h1>
+
+    <p>
+      You just made my entire world brighter.
+      <br><br>
+      Maybe this is only the beginning...
+      but I hope it's a beautiful beginning. 🌹
+    </p>
+
+    <h2>Forever starts with a moment. 💕</h2>
+
+  </div>
+
+
+  <script>
+
+    function sayYes() {
+
+      document.getElementById("question").style.display = "none";
+      document.getElementById("message").style.display = "block";
+
+      for (let i = 0; i < 30; i++) {
+        createHeart();
+      }
+    }
+
+
+    function sayNo() {
+
+      const no = document.getElementById("no");
+
+      no.innerText = "Are you sure? 🥺";
+
+      setTimeout(() => {
+        no.innerText = "NO 😭";
+      }, 1500);
+    }
+
+
+    function createHeart() {
+
+      const heart = document.createElement("div");
+
+      heart.className = "floating-heart";
+      heart.innerHTML = "❤️";
+
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration =
+        (3 + Math.random() * 4) + "s";
+
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 7000);
+    }
+
+  </script>
+
+</body>
+  </html>

@@ -1,202 +1,648 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>A Question For You ❤️</title>
+<title>For Ammu ❤️</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<style>
+* {
+    box-sizing: border-box;
+}
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: linear-gradient(135deg, #120006, #3b0015, #100006);
-      color: white;
-      font-family: Arial, sans-serif;
-      overflow: hidden;
-      text-align: center;
-    }
+body {
+    margin: 0;
+    min-height: 100vh;
+    overflow: hidden;
+    font-family: Georgia, serif;
+    color: white;
+    background:
+        radial-gradient(circle at 50% 20%, #5c102d 0%, transparent 35%),
+        linear-gradient(135deg, #080008, #210014, #090008);
+}
 
-    .card {
-      width: 90%;
-      max-width: 500px;
-      padding: 35px 25px;
-      border-radius: 25px;
-      background: rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(15px);
-      box-shadow: 0 0 40px rgba(255, 0, 90, 0.25);
-    }
+canvas {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+}
 
-    .heart {
-      font-size: 70px;
-      animation: beat 1.2s infinite;
-    }
+.container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    min-height: 100vh;
 
-    @keyframes beat {
-      0%, 100% {
-        transform: scale(1);
-      }
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-      50% {
-        transform: scale(1.2);
-      }
-    }
+    padding: 25px;
+}
 
-    h1 {
-      font-size: 32px;
-      margin: 15px 0;
-    }
+.card {
+    width: 100%;
+    max-width: 520px;
 
-    p {
-      font-size: 18px;
-      line-height: 1.6;
-      color: #ffd9e5;
-    }
+    padding: 38px 25px;
 
-    button {
-      border: none;
-      padding: 14px 30px;
-      margin: 10px;
-      border-radius: 30px;
-      font-size: 17px;
-      font-weight: bold;
-      cursor: pointer;
-    }
+    text-align: center;
 
-    #yes {
-      background: #ff2f75;
-      color: white;
-      box-shadow: 0 0 20px rgba(255, 47, 117, 0.6);
-    }
+    border-radius: 30px;
 
-    #no {
-      background: white;
-      color: #ff2f75;
-    }
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.15);
 
-    #message {
-      display: none;
-    }
+    backdrop-filter: blur(18px);
 
-    .hidden {
-      display: none;
-    }
+    box-shadow:
+        0 0 50px rgba(255,0,100,0.18),
+        inset 0 0 30px rgba(255,255,255,0.03);
 
-    .floating-heart {
-      position: fixed;
-      bottom: -20px;
-      font-size: 25px;
-      animation: float 5s linear forwards;
-      pointer-events: none;
-    }
+    animation: appear 1.5s ease;
+}
 
-    @keyframes float {
-      0% {
-        transform: translateY(0);
-        opacity: 1;
-      }
-
-      100% {
-        transform: translateY(-110vh);
+@keyframes appear {
+    from {
         opacity: 0;
-      }
+        transform: translateY(30px) scale(.95);
     }
-  </style>
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.heart {
+    font-size: 75px;
+
+    animation: heartbeat 1.3s infinite;
+
+    filter:
+        drop-shadow(0 0 15px #ff2d70)
+        drop-shadow(0 0 35px #ff2d70);
+}
+
+@keyframes heartbeat {
+
+    0%,100% {
+        transform: scale(1);
+    }
+
+    25% {
+        transform: scale(1.12);
+    }
+
+    45% {
+        transform: scale(1);
+    }
+
+    65% {
+        transform: scale(1.18);
+    }
+}
+
+h1 {
+    font-size: 32px;
+    margin: 20px 0 15px;
+
+    text-shadow:
+        0 0 10px rgba(255,100,160,.5);
+}
+
+p {
+    font-size: 18px;
+    line-height: 1.8;
+    color: #ffe2eb;
+}
+
+.highlight {
+    color: #ff76a5;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+button {
+    width: 85%;
+    max-width: 300px;
+
+    margin: 10px auto;
+
+    padding: 15px 20px;
+
+    border: none;
+    border-radius: 35px;
+
+    font-size: 17px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: .3s;
+
+    display: block;
+}
+
+button:hover {
+    transform: scale(1.06);
+}
+
+.primary {
+    color: white;
+
+    background:
+        linear-gradient(135deg,#ff276f,#c90050);
+
+    box-shadow:
+        0 0 20px rgba(255,0,100,.45);
+}
+
+.secondary {
+    color: #ff7ba7;
+
+    background: rgba(255,255,255,.09);
+
+    border: 1px solid rgba(255,120,170,.3);
+}
+
+.screen {
+    display: none;
+}
+
+.screen.active {
+    display: block;
+}
+
+.small {
+    font-size: 14px;
+    color: #c9aeb8;
+    margin-top: 20px;
+}
+
+#final {
+    animation: finalAppear 1.5s ease;
+}
+
+@keyframes finalAppear {
+
+    from {
+        opacity: 0;
+        transform: scale(.7);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.floatHeart {
+    position: fixed;
+
+    bottom: -50px;
+
+    font-size: 25px;
+
+    pointer-events: none;
+
+    animation: floatUp linear forwards;
+
+    z-index: 1;
+}
+
+@keyframes floatUp {
+
+    0% {
+        transform:
+            translateY(0)
+            rotate(0deg)
+            scale(.7);
+
+        opacity: 0;
+    }
+
+    15% {
+        opacity: 1;
+    }
+
+    100% {
+        transform:
+            translateY(-115vh)
+            rotate(360deg)
+            scale(1.4);
+
+        opacity: 0;
+    }
+}
+
+.confetti {
+    position: fixed;
+
+    width: 8px;
+    height: 8px;
+
+    top: -10px;
+
+    z-index: 5;
+
+    animation: confettiFall 4s linear forwards;
+}
+
+@keyframes confettiFall {
+
+    to {
+        transform:
+            translateY(110vh)
+            rotate(720deg);
+
+        opacity: 0;
+    }
+}
+
+.fadeText {
+    animation: textFade 1.2s ease;
+}
+
+@keyframes textFade {
+
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+</style>
 </head>
 
 <body>
 
-  <div class="card" id="question">
+<canvas id="stars"></canvas>
+
+<div class="container">
+
+<!-- SCREEN 1 -->
+
+<div class="card screen active" id="screen1">
 
     <div class="heart">❤️</div>
 
-    <h1>I Have A Question For You...</h1>
+    <h1>Hey Ammu...</h1>
 
     <p>
-      There is someone who makes ordinary moments feel special.
-      Someone who makes my heart smile.
-      <br><br>
-      And I have something important to ask...
+        I made something small for you.
+        <br><br>
+        But it comes from a very big place...
+        <br>
+        <span class="highlight">my heart.</span>
     </p>
 
-    <h2>Will you be mine? 💖</h2>
+    <button class="primary" onclick="nextScreen(2)">
+        Open My Heart ❤️
+    </button>
 
-    <button id="yes" onclick="sayYes()">YES ❤️</button>
-
-    <button id="no" onclick="sayNo()">NO 😭</button>
-
-  </div>
+</div>
 
 
-  <div class="card hidden" id="message">
+<!-- SCREEN 2 -->
+
+<div class="card screen" id="screen2">
+
+    <div class="heart">💗</div>
+
+    <h1>Something I Need To Tell You</h1>
+
+    <p class="fadeText">
+
+        Ammu,
+        <br><br>
+
+        <span class="highlight">
+        You are my everything.
+        </span>
+
+        <br><br>
+
+        Please don't leave me...
+        <br>
+        I honestly can't imagine losing you.
+
+        <br><br>
+
+        You have become such a special part
+        of my world.
+
+    </p>
+
+    <button class="primary" onclick="nextScreen(3)">
+        There's one more thing... 💌
+    </button>
+
+</div>
+
+
+<!-- SCREEN 3 -->
+
+<div class="card screen" id="screen3">
 
     <div class="heart">🥹❤️</div>
 
-    <h1>YOU SAID YES! ❤️</h1>
+    <h1>Ammu...</h1>
 
     <p>
-      You just made my entire world brighter.
-      <br><br>
-      Maybe this is only the beginning...
-      but I hope it's a beautiful beginning. 🌹
+
+        So after everything I've said...
+
+        <br><br>
+
+        I just want to know one thing.
+
     </p>
 
-    <h2>Forever starts with a moment. 💕</h2>
+    <h2 class="highlight">
+        Who am I to you?
+    </h2>
 
-  </div>
+    <button class="primary" onclick="answer('everything')">
+        You're my everything ❤️
+    </button>
+
+    <button class="secondary" onclick="answer('special')">
+        Someone very special 💕
+    </button>
+
+    <button class="secondary" onclick="answer('love')">
+        Someone I love 🥹
+    </button>
+
+</div>
 
 
-  <script>
+<!-- FINAL -->
 
-    function sayYes() {
+<div class="card screen" id="final">
 
-      document.getElementById("question").style.display = "none";
-      document.getElementById("message").style.display = "block";
+    <div class="heart">💖</div>
 
-      for (let i = 0; i < 30; i++) {
-        createHeart();
-      }
+    <h1 id="finalTitle">
+        Thank You, Ammu ❤️
+    </h1>
+
+    <p id="finalText">
+
+        Whatever your answer is...
+
+        <br><br>
+
+        I just want you to know that
+        you mean more to me than I can
+        put into words.
+
+        <br><br>
+
+        ❤️ Always special. ❤️
+
+    </p>
+
+    <div class="small">
+        Made with a little code and a lot of heart.
+    </div>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* SCREEN CHANGER */
+
+function nextScreen(number) {
+
+    document.querySelectorAll(".screen")
+        .forEach(screen => {
+            screen.classList.remove("active");
+        });
+
+    document
+        .getElementById("screen" + number)
+        .classList.add("active");
+}
+
+
+/* ANSWER */
+
+function answer(type) {
+
+    document.querySelectorAll(".screen")
+        .forEach(screen => {
+            screen.classList.remove("active");
+        });
+
+    document
+        .getElementById("final")
+        .classList.add("active");
+
+    if (type === "everything") {
+
+        document.getElementById("finalTitle")
+            .innerHTML = "You made my heart smile 🥹❤️";
+
+        document.getElementById("finalText")
+            .innerHTML =
+            "If I'm your everything too...<br><br>" +
+            "then maybe we're exactly where we're supposed to be. ❤️";
+
     }
 
+    else if (type === "special") {
 
-    function sayNo() {
+        document.getElementById("finalTitle")
+            .innerHTML = "That's enough for me ❤️";
 
-      const no = document.getElementById("no");
+        document.getElementById("finalText")
+            .innerHTML =
+            "Being someone special in your world " +
+            "means more to me than you know. 🥹💕";
 
-      no.innerText = "Are you sure? 🥺";
-
-      setTimeout(() => {
-        no.innerText = "NO 😭";
-      }, 1500);
     }
 
+    else {
 
-    function createHeart() {
+        document.getElementById("finalTitle")
+            .innerHTML = "You have no idea how happy I am 🥹❤️";
 
-      const heart = document.createElement("div");
+        document.getElementById("finalText")
+            .innerHTML =
+            "Thank you for being honest with me.<br><br>" +
+            "Whatever happens, I'll always treasure " +
+            "what you mean to me. ❤️";
 
-      heart.className = "floating-heart";
-      heart.innerHTML = "❤️";
+    }
 
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.animationDuration =
-        (3 + Math.random() * 4) + "s";
+    celebration();
+}
 
-      document.body.appendChild(heart);
 
-      setTimeout(() => {
+/* FLOATING HEARTS */
+
+function createHeart() {
+
+    const heart = document.createElement("div");
+
+    heart.className = "floatHeart";
+
+    const hearts = [
+        "❤️",
+        "💗",
+        "💕",
+        "💖",
+        "💘",
+        "💝"
+    ];
+
+    heart.innerHTML =
+        hearts[Math.floor(Math.random() * hearts.length)];
+
+    heart.style.left =
+        Math.random() * 100 + "vw";
+
+    heart.style.animationDuration =
+        (4 + Math.random() * 5) + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
         heart.remove();
-      }, 7000);
+    }, 9000);
+}
+
+setInterval(createHeart, 700);
+
+
+/* CONFETTI */
+
+function celebration() {
+
+    for (let i = 0; i < 80; i++) {
+
+        const piece =
+            document.createElement("div");
+
+        piece.className = "confetti";
+
+        piece.style.left =
+            Math.random() * 100 + "vw";
+
+        piece.style.animationDelay =
+            Math.random() * 1.5 + "s";
+
+        piece.style.transform =
+            `rotate(${Math.random() * 360}deg)`;
+
+        document.body.appendChild(piece);
+
+        setTimeout(() => {
+            piece.remove();
+        }, 5000);
     }
 
-  </script>
+}
+
+
+/* STAR BACKGROUND */
+
+const canvas =
+    document.getElementById("stars");
+
+const ctx =
+    canvas.getContext("2d");
+
+let stars = [];
+
+function resizeCanvas() {
+
+    canvas.width =
+        window.innerWidth;
+
+    canvas.height =
+        window.innerHeight;
+
+    stars = [];
+
+    for (let i = 0; i < 100; i++) {
+
+        stars.push({
+
+            x: Math.random() *
+                canvas.width,
+
+            y: Math.random() *
+                canvas.height,
+
+            size:
+                Math.random() * 1.8,
+
+            speed:
+                Math.random() * .3 + .1
+
+        });
+
+    }
+}
+
+function animateStars() {
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+    ctx.fillStyle =
+        "rgba(255,255,255,.7)";
+
+    stars.forEach(star => {
+
+        ctx.beginPath();
+
+        ctx.arc(
+            star.x,
+            star.y,
+            star.size,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fill();
+
+        star.y -= star.speed;
+
+        if (star.y < 0) {
+            star.y = canvas.height;
+        }
+
+    });
+
+    requestAnimationFrame(animateStars);
+}
+
+resizeCanvas();
+
+window.addEventListener(
+    "resize",
+    resizeCanvas
+);
+
+animateStars();
+
+</script>
 
 </body>
   </html>
